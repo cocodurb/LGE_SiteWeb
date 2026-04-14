@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Cave | La Grappe Escalade Perpignan</title>
+    <meta name="description" content="La Cave de la salle d'escalade sur bloc La Grappe Escalade Perpignan : pour tous les niveaux. 400m² grimpables, jusqu'à 4m50. 18 Av. Victor Dalbiez.">
+
+    <link rel="icon" href="https://la-grappe-escalade.fr/wp-content/uploads/2017/08/cropped-la-grappe-escalade-salle-escalade-192x192.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'violet': '#6B3790',
+                        'violet-dark': '#4e2870',
+                        'violet-light': '#9b6dc0',
+                        'jaune': '#f5c400',
+                        'jaune-light': '#ffe066',
+                        'clair': '#f8f6fb',
+                        'clair2': '#f0ebf7',
+                    },
+                    fontFamily: {
+                        'titre': ['Montserrat', 'sans-serif'],
+                        'texte': ['Open Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .fade-in { animation: fadeIn 0.9s ease both; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+        .card-hover { transition: transform .3s, box-shadow .3s; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(107,55,144,.18); }
+        .nav-link { position:relative; }
+        .nav-link::after { content:''; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:#6B3790; transition:width .3s; }
+        .nav-link:hover::after, .nav-link.active::after { width:100%; }
+        .tag { display:inline-block; background:#ede6f5; color:#6B3790; font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; padding:4px 12px; border-radius:999px; }
+        section { scroll-margin-top: 80px; }
+    </style>
+</head>
+<body class="bg-white text-gray-800 font-texte antialiased">
+
+    <!-- NAVIGATION -->
+    <nav class="bg-white/95 backdrop-blur-sm fixed w-full z-50 border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <img src="https://la-grappe-escalade.fr/wp-content/uploads/2017/07/logo-SMALL.png"
+                         alt="Logo La Grappe Escalade" class="h-12 w-auto"
+                         onerror="this.style.display='none'; document.getElementById('logo-txt').style.display='flex';">
+                    <a href="index.html" id="logo-txt" class="hidden items-center gap-2">
+                        <div class="w-9 h-9 bg-violet rounded-lg flex items-center justify-center">
+                            <span class="text-jaune font-titre font-black text-base">LG</span>
+                        </div>
+                        <span class="text-lg font-titre font-black uppercase text-gray-900">La Grappe <span class="text-violet">Escalade</span></span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-7 font-titre font-bold text-sm uppercase text-gray-700">
+                    <a href="index.html" class="nav-link hover:text-violet transition">Accueil</a>
+                    <a href="salle.html" class="nav-link hover:text-violet transition">La Salle</a>
+                    <a href="cave.html" class="nav-link active text-violet">La Cave</a>
+                    <a href="tarifs.html" class="nav-link hover:text-violet transition">Tarifs</a>
+                    <a href="evenements.html" class="nav-link text-violet font-black hover:text-violet-dark transition drop-shadow-sm">ÉVÉNEMENTS ⚡</a>
+                    <a href="index.html#equipe" class="nav-link hover:text-violet transition">L'Équipe</a>
+                    <a href="index.html#contact" class="bg-violet text-white px-5 py-2 rounded-lg hover:bg-violet-dark transition shadow-sm">Venir grimper</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="burger-btn" class="text-gray-700 focus:outline-none p-2">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200 px-4 py-4 space-y-3 font-titre font-bold text-sm uppercase text-gray-700">
+            <a href="index.html" class="block hover:text-violet">Accueil</a>
+            <a href="salle.html" class="block hover:text-violet transition">La Salle</a>
+            <a href="cave.html" class="block text-violet">La Cave</a>
+            <a href="tarifs.html" class="block hover:text-violet">Tarifs</a>
+            <a href="index.html#equipe" class="block hover:text-violet">L'Équipe</a>
+            <a href="index.html#contact" class="block bg-violet text-white px-4 py-2 rounded-lg text-center mt-2">Venir grimper</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="relative pt-20 min-h-[50vh] flex items-end"
+        style="background-image: url('images/Salle/Espace detente.jpg'); background-size:cover; background-position:center top;">
+        <div class="absolute inset-0 bg-gradient-to-t from-violet-dark/90 via-violet/50 to-transparent"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 pb-16 fade-in">
+            <span class="inline-block bg-jaune text-violet-dark font-titre font-black text-xs uppercase tracking-widest px-4 py-2 rounded-full mb-4">Le Deuxième Univers</span>
+            <h1 class="font-titre text-5xl md:text-7xl font-black tracking-tight text-white uppercase mb-3">La <span class="text-jaune">Cave</span></h1>
+            <p class="text-white/80 text-xl max-w-2xl">
+                Rouge et blanc, bières artisanales, tapas... L'espace idéal pour un after work après votre session de grimpe !
+            </p>
+        </div>
+    </section>
+
+    <!-- LA CAVE -->
+    <section id="cave" class="py-24 bg-clair">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <span class="tag">Le deuxième univers</span>
+                <h2 class="font-titre text-4xl md:text-5xl font-black text-gray-900 uppercase mt-3 mb-4">La <span class="text-violet">Cave</span></h2>
+                <div class="w-20 h-1 bg-violet mx-auto mb-4"></div>
+                <p class="text-gray-500 max-w-xl mx-auto">Rouge et blanc, bières artisanales, tapas… L'espace idéal pour un after work après votre session de grimpe.</p>
+            </div>
+
+            <!-- MENU (VINS & BOISSONS) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                <!-- Vins -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm flex flex-col md:flex-row items-center gap-0 card-hover group">
+                    <div class="w-full md:w-48 h-52 md:h-full flex-shrink-0 overflow-hidden">
+                        <img src="images/Autre photo/Grappe 26-019.png" alt="Vin rouge Syrah Domaine de Lamer"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6 w-full">
+                        <div class="text-3xl mb-2">🍷</div>
+                        <h3 class="font-titre font-black text-gray-900 mb-1">Vins — Domaine De Lamer</h3>
+                        <p class="text-gray-500 text-sm mb-3">Syrah (Rouge) & Chardonnay (Blanc).</p>
+                        <div class="flex flex-wrap items-center gap-3">
+                            <span class="font-titre font-black text-violet text-lg">4€ <span class="text-gray-400 font-normal text-xs">/ verre</span></span>
+                            <span class="font-titre font-black text-violet text-lg">14€ <span class="text-gray-400 font-normal text-xs">sur place</span></span>
+                            <span class="font-titre font-black text-violet text-lg">11,5€ <span class="text-gray-400 font-normal text-xs">VAE</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Autres Boissons -->
+                <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm p-6 card-hover flex flex-col justify-center">
+                    <h3 class="font-titre font-black text-gray-900 mb-3 flex items-center gap-2"><span class="text-2xl">☕</span> Sans Alcool & Chaud</h3>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex justify-between border-b border-gray-100 pb-1"><span>Sodas</span> <span class="font-bold text-violet">2,5€</span></li>
+                        <li class="flex justify-between border-b border-gray-100 pb-1"><span>Soda Artisanal</span> <span class="font-bold text-violet">3,5€</span></li>
+                        <li class="flex justify-between border-b border-gray-100 pb-1"><span>Eau Bouteille</span> <span class="font-bold text-violet">2€</span></li>
+                        <li class="flex justify-between border-b border-gray-100 pb-1"><span>Thé</span> <span class="font-bold text-violet">2€</span></li>
+                        <li class="flex justify-between"><span>Café</span> <span class="font-bold text-violet">1,5€</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- BIÈRES LA BOC -->
+            <div class="mb-12">
+                <div class="text-center mb-8">
+                    <h3 class="font-titre text-2xl font-black text-gray-900 uppercase">Nos bières <span class="text-violet">La Boc</span></h3>
+                    <p class="text-gray-500 text-sm mt-1">Bières artisanales brassées spécialement pour La Grappe Escalade <span class="font-bold text-violet ml-2 bg-violet/10 px-2 py-1 rounded">4,5€</span></p>
+                    <div class="w-14 h-1 bg-jaune mx-auto mt-3"></div>
+                </div>
+                <!-- Photos ambiance bières + tapas -->
+                <div class="grid grid-cols-3 gap-3 mb-6">
+                    <div class="rounded-2xl overflow-hidden h-48 card-hover group"><img src="images/Autre photo/Grappe 26-008.png" alt="La Boc bière et olives" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                    <div class="rounded-2xl overflow-hidden h-48 card-hover group"><img src="images/Autre photo/Grappe 26-009.png" alt="La Boc bière" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                    <div class="rounded-2xl overflow-hidden h-48 card-hover group"><img src="images/Autre photo/Grappe 26-010.png" alt="La Boc bière vue horizontale" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                </div>
+                <!-- Grille des bouteilles -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
+                    <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm card-hover group">
+                        <div class="aspect-square overflow-hidden bg-gray-50"><img src="images/bieres/Grappe 26-001.png" alt="La Boc - Bière au Piment" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                        <div class="p-2 text-center"><div class="w-3 h-3 rounded-full bg-red-500 mx-auto mb-1"></div><p class="font-titre font-black text-gray-900 text-xs">Piment 🌶️</p></div>
+                    </div>
+                    <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm card-hover group">
+                        <div class="aspect-square overflow-hidden bg-gray-50"><img src="images/bieres/Grappe 26-002.png" alt="La Boc - Bière Stout" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                        <div class="p-2 text-center"><div class="w-3 h-3 rounded-full bg-gray-900 mx-auto mb-1"></div><p class="font-titre font-black text-gray-900 text-xs">Stout</p></div>
+                    </div>
+                    <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm card-hover group">
+                        <div class="aspect-square overflow-hidden bg-gray-50"><img src="images/bieres/Grappe 26-003.png" alt="La Boc - Bière Blonde" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                        <div class="p-2 text-center"><div class="w-3 h-3 rounded-full bg-yellow-400 mx-auto mb-1"></div><p class="font-titre font-black text-gray-900 text-xs">Blonde</p></div>
+                    </div>
+                    <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm card-hover group">
+                        <div class="aspect-square overflow-hidden bg-gray-50"><img src="images/bieres/Grappe 26-004.png" alt="La Boc - Bière Blanche" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                        <div class="p-2 text-center"><div class="w-3 h-3 rounded-full bg-blue-200 mx-auto mb-1"></div><p class="font-titre font-black text-gray-900 text-xs">Blanche</p></div>
+                    </div>
+                    <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm card-hover group">
+                        <div class="aspect-square overflow-hidden bg-gray-50"><img src="images/bieres/Grappe 26-005.png" alt="La Boc - Bière IPA" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                        <div class="p-2 text-center"><div class="w-3 h-3 rounded-full bg-green-400 mx-auto mb-1"></div><p class="font-titre font-black text-gray-900 text-xs">IPA</p></div>
+                    </div>
+                    <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm card-hover group">
+                        <div class="aspect-square overflow-hidden bg-gray-50"><img src="images/bieres/Grappe 26-006.png" alt="La Boc - Acid BVO" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                        <div class="p-2 text-center"><div class="w-3 h-3 rounded-full bg-pink-400 mx-auto mb-1"></div><p class="font-titre font-black text-gray-900 text-xs">Acid BVO</p></div>
+                    </div>
+                    <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm card-hover group">
+                        <div class="aspect-square overflow-hidden bg-gray-50"><img src="images/bieres/Grappe 26-007.png" alt="La Boc - La Mielleuse" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                        <div class="p-2 text-center"><div class="w-3 h-3 rounded-full bg-amber-300 mx-auto mb-1"></div><p class="font-titre font-black text-gray-900 text-xs">Mielleuse 🍯</p></div>
+                    </div>
+                    <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm card-hover group">
+                        <div class="aspect-square overflow-hidden bg-gray-50"><img src="images/Autre photo/Grappe 26-012.png" alt="Goxoa - Sans alcool" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                        <div class="p-2 text-center"><div class="w-3 h-3 rounded-full bg-gray-300 mx-auto mb-1"></div><p class="font-titre font-black text-gray-900 text-xs">Sans alcool</p></div>
+                    </div>
+                </div>
+                <div class="text-center mt-6">
+                    <p class="text-xs text-red-500 font-bold uppercase tracking-wide bg-red-50 inline-block px-4 py-2 rounded-lg border border-red-100">La vente des bières et vins se fera accompagnée obligatoirement d'une planche de tapas</p>
+                </div>
+            </div>
+
+            <!-- NOTRE CARTE (TAPAS) -->
+            <div>
+                <div class="text-center mb-8">
+                    <h3 class="font-titre text-2xl font-black text-gray-900 uppercase">Notre <span class="text-violet">Carte Tapas</span></h3>
+                    <p class="text-gray-500 text-sm mt-1">Pour grignoter et partager après la grimpe</p>
+                    <div class="w-14 h-1 bg-jaune mx-auto mt-3"></div>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Planche Mixte -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm card-hover group flex flex-col">
+                        <div class="h-40 overflow-hidden"><img src="images/Autre photo/Grappe 26-023.png" alt="Planche Mixte" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                        <div class="p-3 flex-grow flex flex-col">
+                            <p class="font-titre font-bold text-gray-900 text-sm">Planche Mixte</p>
+                            <div class="mt-auto pt-2 flex justify-between text-xs">
+                                <span>Petite (75g) <b class="text-violet">10€</b></span>
+                                <span>Grande (150g) <b class="text-violet">19€</b></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Planche Manchego -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm card-hover group flex flex-col">
+                        <div class="h-40 overflow-hidden"><img src="images/Autre photo/Grappe 26-022.png" alt="Planche Manchego" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                        <div class="p-3 flex-grow flex flex-col">
+                            <p class="font-titre font-bold text-gray-900 text-sm">Planche Manchego</p>
+                            <div class="mt-auto pt-2 flex justify-between text-xs">
+                                <span>Petite <b class="text-violet">5€</b></span>
+                                <span>Grande <b class="text-violet">8€</b></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Terrine Bonzom -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm card-hover group flex flex-col">
+                        <div class="h-40 overflow-hidden"><img src="images/Autre photo/Grappe 26-018.png" alt="Terrine Bonzom" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                        <div class="p-3 flex-grow flex flex-col">
+                            <p class="font-titre font-bold text-gray-900 text-sm">Terrine Bonzom</p>
+                            <div class="mt-auto pt-2 text-right">
+                                <b class="text-violet text-lg">7€</b>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Saucisson Sec -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm card-hover group flex flex-col">
+                        <div class="h-40 overflow-hidden"><img src="images/Autre photo/Grappe 26-017.png" alt="Saucisson sec" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                        <div class="p-3 flex-grow flex flex-col">
+                            <p class="font-titre font-bold text-gray-900 text-sm">Saucisson sec</p>
+                            <div class="mt-auto pt-2 text-right">
+                                <b class="text-violet text-lg">7,5€</b>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Olivade/Escalivade -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm card-hover group flex flex-col">
+                        <div class="h-40 overflow-hidden flex">
+                            <img src="images/Autre photo/Grappe 26-015.png" class="w-1/2 h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <img src="images/Autre photo/Grappe 26-016.png" class="w-1/2 h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-3 flex-grow flex flex-col">
+                            <p class="font-titre font-bold text-gray-900 text-sm">Olivade / Escalivade</p>
+                            <div class="mt-auto pt-2 text-right">
+                                <b class="text-violet text-lg">5€</b>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Olives Cocktail -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm card-hover group flex flex-col">
+                        <div class="h-40 overflow-hidden bg-gray-50 flex items-center justify-center text-4xl">
+                            🫒
+                        </div>
+                        <div class="p-3 flex-grow flex flex-col">
+                            <p class="font-titre font-bold text-gray-900 text-sm">Olives Cocktail <span class="text-gray-400 font-normal text-xs">(250g)</span></p>
+                            <div class="mt-auto pt-2 text-right">
+                                <b class="text-violet text-lg">4€</b>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Snacks sucrés -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm card-hover group flex flex-col">
+                        <div class="h-40 overflow-hidden"><img src="images/Autre photo/Grappe 26-011.png" alt="Cookies maison" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                        <div class="p-3 flex-grow flex flex-col">
+                            <p class="font-titre font-bold text-gray-900 text-sm">Snack (ex: Cookies)</p>
+                            <div class="mt-auto pt-2 text-right">
+                                <b class="text-violet text-lg">2€</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HORAIRES & CTA -->
+    <section class="py-20 bg-violet text-center">
+        <div class="max-w-5xl mx-auto px-4">
+            <h2 class="font-titre text-4xl font-black text-white uppercase mb-3">Horaires <span class="text-jaune">d'ouverture</span></h2>
+            <div class="w-16 h-1 bg-jaune mx-auto mb-10"></div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 mb-10">
+                <div class="bg-white/15 border border-white/20 rounded-xl p-4"><p class="text-jaune font-titre font-black text-xs uppercase mb-1">Lundi</p><p class="text-white font-bold text-sm">17h–22h</p></div>
+                <div class="bg-white/15 border border-white/20 rounded-xl p-4"><p class="text-jaune font-titre font-black text-xs uppercase mb-1">Mardi</p><p class="text-white font-bold text-sm">12h–22h</p></div>
+                <div class="bg-white/15 border border-white/20 rounded-xl p-4"><p class="text-jaune font-titre font-black text-xs uppercase mb-1">Mercredi</p><p class="text-white font-bold text-sm">14h–22h</p></div>
+                <div class="bg-white/15 border border-white/20 rounded-xl p-4"><p class="text-jaune font-titre font-black text-xs uppercase mb-1">Jeudi</p><p class="text-white font-bold text-sm">12h–22h</p></div>
+                <div class="bg-white/15 border border-white/20 rounded-xl p-4"><p class="text-jaune font-titre font-black text-xs uppercase mb-1">Vendredi</p><p class="text-white font-bold text-sm">12h–22h</p></div>
+                <div class="bg-white/15 border border-white/20 rounded-xl p-4"><p class="text-jaune font-titre font-black text-xs uppercase mb-1">Samedi</p><p class="text-white font-bold text-sm">10h–19h</p><p class="text-white/50 text-xs">privatisation 19h–22h</p></div>
+                <div class="bg-white/15 border border-white/20 rounded-xl p-4"><p class="text-jaune font-titre font-black text-xs uppercase mb-1">Dimanche</p><p class="text-white font-bold text-sm">14h–19h</p></div>
+            </div>
+            <p class="text-white/60 text-sm mb-8">🌙 Entrée Nuit à partir de 21h — Lundi, Mardi, Jeudi & Vendredi</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="tarifs.html" class="bg-jaune text-violet-dark px-8 py-4 rounded-xl font-titre font-bold text-sm uppercase hover:bg-jaune-light transition shadow-lg">Voir les tarifs</a>
+                <a href="index.html#contact" class="border-2 border-white text-white px-8 py-4 rounded-xl font-titre font-bold text-sm uppercase hover:bg-white hover:text-violet transition shadow-lg">Nous contacter</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://la-grappe-escalade.fr/wp-content/uploads/2017/07/logo-SMALL.png" alt="Logo" class="h-10 w-auto" onerror="this.style.display='none'">
+                        <span class="font-titre font-black uppercase">La Grappe <span class="text-violet-light">Escalade</span></span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Un même nom, deux univers !</p>
+                    <p class="text-gray-500 text-xs mt-2">SARL La Grappe Escalade Durbet Moretti · SIRET : 99412665400015</p>
+                </div>
+                <div>
+                    <h3 class="font-titre font-bold uppercase text-xs tracking-widest mb-4 text-gray-400">Contact</h3>
+                    <p class="text-gray-300 text-sm mb-2">📍 18 Avenue Victor Dalbiez, 66000 Perpignan</p>
+                    <p class="text-gray-300 text-sm mb-2">📞 <a href="tel:0980571240" class="hover:text-jaune transition">09.80.57.12.40</a></p>
+                </div>
+                <div>
+                    <h3 class="font-titre font-bold uppercase text-xs tracking-widest mb-4 text-gray-400">Navigation</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="index.html" class="hover:text-jaune transition">Accueil</a></li>
+                        <li><a href="salle.html" class="hover:text-jaune transition">La Salle (Le Bloc)</a></li>
+                        <li><a href="cave.html" class="hover:text-jaune transition">La Cave (Le Bar)</a></li>
+                        <li><a href="tarifs.html" class="hover:text-jaune transition">Les Tarifs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 text-center text-xs text-gray-600">
+                &copy; 2026 La Grappe Escalade. Tous droits réservés.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const btn = document.getElementById('burger-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+    </script>
+</body>
+</html>

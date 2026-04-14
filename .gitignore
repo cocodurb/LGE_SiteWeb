@@ -1,0 +1,6 @@
+.DS_Store
+server_log.txt
+database.sqlite-shm
+database.sqlite-wal
+*.log
+__pycache__/

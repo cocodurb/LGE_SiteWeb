@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les Tarifs | La Grappe Escalade Perpignan</title>
+    <meta name="description" content="Tarifs de la salle d'escalade La Grappe Escalade : entrée journée, Happy Hour, carte 10 entrées, abonnements. 18 Av. Victor Dalbiez, 66000 Perpignan.">
+
+    <link rel="icon" href="https://la-grappe-escalade.fr/wp-content/uploads/2017/08/cropped-la-grappe-escalade-salle-escalade-192x192.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'violet': '#6B3790',
+                        'violet-dark': '#4e2870',
+                        'violet-light': '#9b6dc0',
+                        'jaune': '#f5c400',
+                        'jaune-light': '#ffe066',
+                        'clair': '#f8f6fb',
+                        'clair2': '#f0ebf7',
+                    },
+                    fontFamily: {
+                        'titre': ['Montserrat', 'sans-serif'],
+                        'texte': ['Open Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .fade-in { animation: fadeIn 0.9s ease both; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+        .card-hover { transition: transform .3s, box-shadow .3s; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(107,55,144,.18); }
+        .nav-link { position:relative; }
+        .nav-link::after { content:''; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:#6B3790; transition:width .3s; }
+        .nav-link:hover::after, .nav-link.active::after { width:100%; }
+        .tag { display:inline-block; background:#ede6f5; color:#6B3790; font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; padding:4px 12px; border-radius:999px; }
+        .price-card { border-radius: 1.25rem; padding: 2rem; display: flex; flex-direction: column; }
+        .popular-ring { animation: popularRing 3s infinite; }
+        @keyframes popularRing { 0%,100% { box-shadow: 0 0 0 0 rgba(107,55,144,.25); } 50% { box-shadow: 0 0 0 14px rgba(107,55,144,0); } }
+        section { scroll-margin-top: 80px; }
+    </style>
+</head>
+<body class="bg-white text-gray-800 font-texte antialiased">
+
+    <!-- NAVIGATION -->
+    <nav class="bg-white/95 backdrop-blur-sm fixed w-full z-50 border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <img src="https://la-grappe-escalade.fr/wp-content/uploads/2017/07/logo-SMALL.png"
+                         alt="Logo La Grappe Escalade" class="h-12 w-auto"
+                         onerror="this.style.display='none'; document.getElementById('logo-txt').style.display='flex';">
+                    <a href="index.html" id="logo-txt" class="hidden items-center gap-2">
+                        <div class="w-9 h-9 bg-violet rounded-lg flex items-center justify-center">
+                            <span class="text-jaune font-titre font-black text-base">LG</span>
+                        </div>
+                        <span class="text-lg font-titre font-black uppercase text-gray-900">La Grappe <span class="text-violet">Escalade</span></span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-7 font-titre font-bold text-sm uppercase text-gray-700">
+                    <a href="index.html" class="nav-link hover:text-violet transition">Accueil</a>
+                    <a href="salle.html" class="nav-link hover:text-violet transition">La Salle</a>
+                    <a href="cave.html" class="nav-link hover:text-violet transition">La Cave</a>
+                    <a href="tarifs.html" class="nav-link active text-violet">Tarifs</a>
+                    <a href="evenements.html" class="nav-link text-violet font-black hover:text-violet-dark transition drop-shadow-sm">ÉVÉNEMENTS ⚡</a>
+                    <a href="index.html#equipe" class="nav-link hover:text-violet transition">L'Équipe</a>
+                    <a href="index.html#contact" class="bg-violet text-white px-5 py-2 rounded-lg hover:bg-violet-dark transition shadow-sm">Venir grimper</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="burger-btn" class="text-gray-700 focus:outline-none p-2">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200 px-4 py-4 space-y-3 font-titre font-bold text-sm uppercase text-gray-700">
+            <a href="index.html" class="block hover:text-violet">Accueil</a>
+            <a href="salle.html" class="block hover:text-violet">La Salle</a>
+            <a href="cave.html" class="block hover:text-violet">La Cave</a>
+            <a href="tarifs.html" class="block text-violet">Tarifs</a>
+            <a href="evenements.html" class="block text-violet font-black bg-violet/5 py-1 px-2 rounded">ÉVÉNEMENTS ⚡</a>
+            <a href="index.html#equipe" class="block hover:text-violet">L'Équipe</a>
+            <a href="index.html#contact" class="block bg-violet text-white px-4 py-2 rounded-lg text-center mt-2">Venir grimper</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="relative pt-20 min-h-[38vh] flex items-center" style="background: linear-gradient(135deg, #6B3790 0%, #4e2870 60%, #2d1545 100%);">
+        <div class="absolute inset-0 opacity-10" style="background-image: url('https://la-grappe-escalade.fr/wp-content/uploads/2019/01/grande-salle.jpg'); background-size:cover; background-position:center;"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center fade-in">
+            <span class="inline-block bg-jaune text-violet-dark font-titre font-black text-xs uppercase tracking-widest px-4 py-2 rounded-full mb-4">La Grappe Escalade — Perpignan</span>
+            <h1 class="font-titre text-5xl md:text-7xl font-black tracking-tight text-white uppercase mb-5">Les <span class="text-jaune">Tarifs</span></h1>
+            <p class="text-white/80 text-lg max-w-xl mx-auto">Plusieurs formules pour grimper à votre rythme.</p>
+        </div>
+    </section>
+
+    <!-- NOTES -->
+    <div class="bg-violet/5 border-b border-violet/15">
+        <div class="max-w-7xl mx-auto px-4 py-3">
+            <div class="flex flex-wrap gap-x-6 gap-y-1 text-xs text-gray-500">
+                <span><b class="text-violet">*</b> +5€ de caution pour les cartes magnétiques (carnets/abonnements)</span>
+                <span><b class="text-violet">**</b> Année Midi : Créneau valable pour les arrivées le midi</span>
+                <span><b class="text-violet">***</b> Séance Soir : Créneau valable pour les arrivées le soir</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ENTRÉES -->
+    <section id="entrees" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <span class="tag">Entrées ponctuelles</span>
+                <h2 class="font-titre text-4xl md:text-5xl font-black text-gray-900 uppercase mt-3 mb-4">Passes <span class="text-violet">journée</span></h2>
+                <div class="w-20 h-1 bg-jaune mx-auto mb-4"></div>
+                <p class="text-gray-500 max-w-xl mx-auto text-sm">Accès complet à la salle de bloc et au Pressoir. Chaque formule correspond à un besoin spécifique.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <!-- Séance Normal -->
+                <div class="price-card bg-clair border border-clair2 card-hover">
+                    <p class="font-titre text-xs uppercase tracking-widest text-gray-400 mb-1">Tarif Normal</p>
+                    <div class="flex items-end gap-1 mb-0">
+                        <span class="font-titre text-6xl font-black text-gray-900">13</span>
+                        <span class="text-gray-400 text-xl mb-2">€</span>
+                    </div>
+                    <p class="text-gray-500 text-xs mb-5">Séance classique</p>
+                    <ul class="space-y-2 text-xs text-gray-500 flex-grow">
+                        <li class="flex items-center gap-2"><span class="bg-violet text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">✓</span> Accès illimité le jour J</li>
+                        <li class="flex items-center gap-2"><span class="bg-violet text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">✓</span> Accès Pressoir inclus</li>
+                    </ul>
+                </div>
+
+                <!-- Séance Étudiant -->
+                <div class="price-card bg-clair border border-clair2 card-hover">
+                    <p class="font-titre text-xs uppercase tracking-widest text-gray-400 mb-1">Étudiant &lt; 28 ans</p>
+                    <div class="flex items-end gap-1 mb-0">
+                        <span class="font-titre text-6xl font-black text-gray-900">11</span>
+                        <span class="text-gray-400 text-xl mb-2">€</span>
+                    </div>
+                    <p class="text-gray-500 text-xs mb-5">Sur justificatif valide</p>
+                    <ul class="space-y-2 text-xs text-gray-500 flex-grow">
+                        <li class="flex items-center gap-2"><span class="bg-violet text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">✓</span> Accès illimité le jour J</li>
+                        <li class="flex items-center gap-2"><span class="bg-violet text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">✓</span> Accès Pressoir inclus</li>
+                    </ul>
+                </div>
+
+                <!-- Séance soir Normal -->
+                <div class="price-card bg-indigo-50 border border-indigo-200 card-hover">
+                    <p class="font-titre text-xs uppercase tracking-widest text-indigo-500 mb-1">Séance Soir (Normal)</p>
+                    <div class="flex items-end gap-1 mb-0">
+                        <span class="font-titre text-6xl font-black text-gray-900">8</span>
+                        <span class="text-gray-400 text-xl mb-2">€</span>
+                    </div>
+                    <p class="text-gray-500 text-xs mb-5">Créneau du soir ***</p>
+                    <ul class="space-y-2 text-xs text-gray-500 flex-grow">
+                        <li class="flex items-center gap-2"><span class="bg-indigo-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">✓</span> Accès complet</li>
+                    </ul>
+                </div>
+
+                <!-- Séance soir Étudiant -->
+                <div class="price-card bg-indigo-50 border border-indigo-200 card-hover">
+                    <p class="font-titre text-xs uppercase tracking-widest text-indigo-500 mb-1">Séance Soir (Étudiant)</p>
+                    <div class="flex items-end gap-1 mb-0">
+                        <span class="font-titre text-6xl font-black text-gray-900">7</span>
+                        <span class="text-gray-400 text-xl mb-2">€</span>
+                    </div>
+                    <p class="text-gray-500 text-xs mb-5">Créneau du soir ***</p>
+                    <ul class="space-y-2 text-xs text-gray-500 flex-grow">
+                        <li class="flex items-center gap-2"><span class="bg-indigo-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">✓</span> Accès complet</li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- ABONNEMENTS -->
+    <section id="abonnements" class="py-24 bg-clair">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <span class="tag">Grimper sans compter</span>
+                <h2 class="font-titre text-4xl md:text-5xl font-black text-gray-900 uppercase mt-3 mb-4">Carnets & <span class="text-violet">Abonnements</span></h2>
+                <div class="w-20 h-1 bg-violet mx-auto mb-4"></div>
+                <p class="text-gray-500 max-w-xl mx-auto text-sm">Abonnements 6 mois et annuels payables en 1 fois (ou 3 fois par chèque). Caution carte : 5€*.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
+
+                <!-- 10 séances -->
+                <div class="price-card bg-white border border-gray-200 card-hover shadow-sm">
+                    <p class="font-titre text-xs uppercase tracking-widest text-violet mb-1 mt-2">Carnet</p>
+                    <h3 class="font-titre text-2xl font-black text-gray-900 mb-4">10 séances</h3>
+                    <div class="space-y-3 mb-6 flex-grow">
+                        <div class="flex justify-between items-end border-b border-gray-100 pb-2">
+                            <span class="text-gray-500 text-sm">Tarif Normal</span>
+                            <span class="font-titre font-black text-gray-900 text-2xl">117€</span>
+                        </div>
+                        <div class="flex justify-between items-end border-b border-gray-100 pb-2">
+                            <span class="text-gray-500 text-sm">Étudiant &lt; 28 ans</span>
+                            <span class="font-titre font-black text-violet text-2xl">100€</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-xs text-center mt-auto mb-4">+5€ caution carte*</p>
+                </div>
+
+                <!-- Mensuel -->
+                <div class="price-card bg-white border border-gray-200 card-hover shadow-sm">
+                    <p class="font-titre text-xs uppercase tracking-widest text-gray-400 mb-1 mt-2">Abonnement</p>
+                    <h3 class="font-titre text-2xl font-black text-gray-900 mb-4">Mensuel</h3>
+                    <div class="space-y-3 mb-6 flex-grow">
+                        <div class="flex justify-between items-end border-b border-gray-100 pb-2">
+                            <span class="text-gray-500 text-sm">Tarif Normal</span>
+                            <span class="font-titre font-black text-gray-900 text-2xl">49,5€</span>
+                        </div>
+                        <div class="flex justify-between items-end border-b border-gray-100 pb-2">
+                            <span class="text-gray-500 text-sm">Étudiant &lt; 28 ans</span>
+                            <span class="font-titre font-black text-violet text-2xl">43,5€</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-xs text-center mt-auto mb-4">+5€ caution carte*</p>
+                </div>
+
+                <!-- 6 mois -->
+                <div class="price-card bg-white border border-gray-200 card-hover shadow-sm relative">
+                    <p class="font-titre text-xs uppercase tracking-widest text-gray-400 mb-1 mt-2">Abonnement</p>
+                    <h3 class="font-titre text-2xl font-black text-gray-900 mb-4">6 mois</h3>
+                    <div class="space-y-3 mb-6 flex-grow">
+                        <div class="flex justify-between items-end border-b border-gray-100 pb-2">
+                            <span class="text-gray-500 text-sm">Tarif Normal</span>
+                            <span class="font-titre font-black text-gray-900 text-2xl">275€</span>
+                        </div>
+                        <div class="flex justify-between items-end border-b border-gray-100 pb-2">
+                            <span class="text-gray-500 text-sm">Étudiant &lt; 28 ans</span>
+                            <span class="font-titre font-black text-violet text-2xl">238€</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-xs text-center mt-auto mb-4">+5€ caution carte*</p>
+                </div>
+
+                <!-- Année -->
+                <div class="price-card bg-white border-2 border-violet card-hover popular-ring relative shadow-lg">
+                    <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-violet text-white text-xs font-titre font-black uppercase px-5 py-1.5 rounded-full tracking-wide whitespace-nowrap shadow">⭐ Le plus populaire</span>
+                    <p class="font-titre text-xs uppercase tracking-widest text-violet mb-1 mt-4">Abonnement</p>
+                    <h3 class="font-titre text-2xl font-black text-gray-900 mb-4">Année</h3>
+                    <div class="space-y-3 mb-6 flex-grow">
+                        <div class="flex justify-between items-end border-b border-gray-100 pb-2">
+                            <span class="text-gray-500 text-sm">Tarif Normal</span>
+                            <span class="font-titre font-black text-gray-900 text-2xl">435€</span>
+                        </div>
+                        <div class="flex justify-between items-end border-b border-gray-100 pb-2">
+                            <span class="text-gray-500 text-sm">Étudiant &lt; 28 ans</span>
+                            <span class="font-titre font-black text-violet text-2xl">375€</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-xs text-center mt-auto mb-4">+5€ caution carte*</p>
+                </div>
+
+                <!-- Année midi -->
+                <div class="price-card bg-yellow-50 border border-yellow-200 card-hover shadow-sm">
+                    <p class="font-titre text-xs uppercase tracking-widest text-yellow-600 mb-1 mt-2">Abonnement Spécial</p>
+                    <h3 class="font-titre text-2xl font-black text-gray-900 mb-4">Année Midi **</h3>
+                    <div class="space-y-3 mb-6 flex-grow">
+                        <div class="flex justify-between items-end border-b border-yellow-200 pb-2">
+                            <span class="text-gray-600 text-sm">Tarif Normal</span>
+                            <span class="font-titre font-black text-gray-900 text-2xl">345€</span>
+                        </div>
+                        <div class="flex justify-between items-end border-b border-yellow-200 pb-2">
+                            <span class="text-gray-600 text-sm">Étudiant &lt; 28 ans</span>
+                            <span class="font-titre font-black text-violet text-2xl">305€</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-xs text-center mt-auto mb-4">+5€ caution carte*</p>
+                </div>
+
+            </div>
+
+            <!-- Comité entrep. -->
+            <div class="mt-8 bg-white border border-violet/20 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm">
+                <div>
+                    <h3 class="font-titre font-black text-gray-900 text-lg mb-1">🏢 Comité d'entreprise ?</h3>
+                    <p class="text-gray-500 text-sm">Des partenariats sont possibles entre La Grappe Escalade et votre entreprise.</p>
+                </div>
+                <a href="https://la-grappe-escalade.fr/contact-la-grappe-escalade/" target="_blank"
+                    class="flex-shrink-0 bg-violet text-white px-6 py-3 rounded-xl font-titre font-bold text-sm uppercase hover:bg-violet-dark transition shadow-md">
+                    Nous contacter
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXTRAS -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-titre text-3xl font-black text-gray-900 uppercase mb-2">Équipement & <span class="text-violet">La Cave</span></h2>
+                <div class="w-16 h-1 bg-jaune mx-auto"></div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-clair border border-clair2 rounded-2xl p-6 text-center card-hover">
+                    <div class="text-4xl mb-3">🥾</div>
+                    <p class="font-titre font-bold text-gray-800 text-sm mb-1">Location chaussons</p>
+                    <p class="text-violet font-black text-2xl mt-2">3,5€</p>
+                </div>
+                <div class="bg-clair border border-clair2 rounded-2xl p-6 text-center card-hover">
+                    <div class="text-4xl mb-3">🍷</div>
+                    <p class="font-titre font-bold text-gray-800 text-sm mb-1">Vin — Domaine De Lamer</p>
+                    <p class="text-violet font-black text-lg">A partir de 4€</p>
+                </div>
+                <div class="bg-clair border border-clair2 rounded-2xl p-6 text-center card-hover">
+                    <div class="text-4xl mb-3">🍺</div>
+                    <p class="font-titre font-bold text-gray-800 text-sm mb-1">Bières artisanales</p>
+                    <p class="text-violet font-black text-lg mt-1">4,5€</p>
+                </div>
+                <div class="bg-clair border border-clair2 rounded-2xl p-6 text-center card-hover">
+                    <div class="text-4xl mb-3">🥩</div>
+                    <p class="font-titre font-bold text-gray-800 text-sm mb-1">Tapas</p>
+                    <p class="text-gray-500 text-xs mt-1">Pain tomate, charcuterie…</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HORAIRES -->
+    <section class="py-16 bg-violet text-center">
+        <div class="max-w-5xl mx-auto px-4">
+            <h2 class="font-titre text-3xl font-black text-white uppercase mb-8">Horaires <span class="text-jaune">d'ouverture</span></h2>
+            <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 mb-8">
+                <div class="bg-white/15 rounded-xl p-4 border border-white/20"><p class="text-jaune text-xs font-titre font-bold uppercase mb-1">Lundi</p><p class="text-white font-bold text-sm">17h–22h</p></div>
+                <div class="bg-white/15 rounded-xl p-4 border border-white/20"><p class="text-jaune text-xs font-titre font-bold uppercase mb-1">Mardi</p><p class="text-white font-bold text-sm">12h–22h</p></div>
+                <div class="bg-white/15 rounded-xl p-4 border border-white/20"><p class="text-jaune text-xs font-titre font-bold uppercase mb-1">Mercredi</p><p class="text-white font-bold text-sm">14h–22h</p></div>
+                <div class="bg-white/15 rounded-xl p-4 border border-white/20"><p class="text-jaune text-xs font-titre font-bold uppercase mb-1">Jeudi</p><p class="text-white font-bold text-sm">12h–22h</p></div>
+                <div class="bg-white/15 rounded-xl p-4 border border-white/20"><p class="text-jaune text-xs font-titre font-bold uppercase mb-1">Vendredi</p><p class="text-white font-bold text-sm">12h–22h</p></div>
+                <div class="bg-white/15 rounded-xl p-4 border border-white/20"><p class="text-jaune text-xs font-titre font-bold uppercase mb-1">Samedi</p><p class="text-white font-bold text-sm">10h–19h</p></div>
+                <div class="bg-white/15 rounded-xl p-4 border border-white/20"><p class="text-jaune text-xs font-titre font-bold uppercase mb-1">Dimanche</p><p class="text-white font-bold text-sm">14h–19h</p></div>
+            </div>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
+                <a href="salle.html" class="bg-jaune text-violet-dark px-8 py-4 rounded-xl font-titre font-bold text-sm uppercase hover:bg-jaune-light transition shadow-lg">Découvrir la salle</a>
+                <a href="index.html#contact" class="border-2 border-white text-white px-8 py-4 rounded-xl font-titre font-bold text-sm uppercase hover:bg-white hover:text-violet transition shadow-lg">Nous contacter</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-24 bg-clair">
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="font-titre text-3xl font-black text-gray-900 uppercase mb-2">Questions <span class="text-violet">fréquentes</span></h2>
+                <div class="w-16 h-1 bg-jaune mx-auto"></div>
+            </div>
+            <div class="space-y-3">
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                    <button class="faq-btn w-full text-left px-6 py-5 flex justify-between items-center font-titre font-bold text-gray-800 hover:text-violet transition">
+                        Faut-il être expérimenté pour venir ?
+                        <svg class="faq-icon w-5 h-5 text-violet flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-gray-500 text-sm leading-relaxed">
+                        Pas du tout ! La salle est ouverte à tous les niveaux. Une paire de chaussures, des bras et une folle envie de s'éclater suffisent. Notre équipe est disponible pour vous conseiller.
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                    <button class="faq-btn w-full text-left px-6 py-5 flex justify-between items-center font-titre font-bold text-gray-800 hover:text-violet transition">
+                        Comment fonctionne la carte 10 entrées ?
+                        <svg class="faq-icon w-5 h-5 text-violet flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-gray-500 text-sm leading-relaxed">
+                        La carte est valable 12 mois. Une entrée est décomptée à chaque visite, peu importe la durée dans la salle. Accès à la salle et au Pressoir inclus.
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                    <button class="faq-btn w-full text-left px-6 py-5 flex justify-between items-center font-titre font-bold text-gray-800 hover:text-violet transition">
+                        Puis-je venir avec des enfants ?
+                        <svg class="faq-icon w-5 h-5 text-violet flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-gray-500 text-sm leading-relaxed">
+                        Oui ! Pour les 8–10 ans : 1 adulte autonome et compétent pour max 2 enfants (entrée payante pour l'adulte). Une autorisation parentale est obligatoire pour les mineurs en autonomie.
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                    <button class="faq-btn w-full text-left px-6 py-5 flex justify-between items-center font-titre font-bold text-gray-800 hover:text-violet transition">
+                        Comment payer mon abonnement en plusieurs fois ?
+                        <svg class="faq-icon w-5 h-5 text-violet flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-gray-500 text-sm leading-relaxed">
+                        Les abonnements sont à régler en 1 fois. Un paiement en 3 fois est possible si vous payez par chèque. Renseignez-vous à l'accueil.
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                    <button class="faq-btn w-full text-left px-6 py-5 flex justify-between items-center font-titre font-bold text-gray-800 hover:text-violet transition">
+                        Comment venir à la salle ?
+                        <svg class="faq-icon w-5 h-5 text-violet flex-shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-gray-500 text-sm leading-relaxed">
+                        Parkings gratuits à 2–3 min à pied. E.Leclerc Sud à 8 min. Bus lignes 11 & 18, arrêt ST-MARTIN. Parking vélo devant la salle.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://la-grappe-escalade.fr/wp-content/uploads/2017/07/logo-SMALL.png" alt="Logo" class="h-10 w-auto" onerror="this.style.display='none'">
+                        <span class="font-titre font-black uppercase">La Grappe <span class="text-violet-light">Escalade</span></span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Un même nom, deux univers !</p>
+                    <p class="text-gray-500 text-xs mt-2">SARL La Grappe Escalade Durbet Moretti · SIRET : 99412665400015</p>
+                </div>
+                <div>
+                    <h3 class="font-titre font-bold uppercase text-xs tracking-widest mb-4 text-gray-400">Contact</h3>
+                    <p class="text-gray-300 text-sm mb-2">📍 18 Avenue Victor Dalbiez, 66000 Perpignan</p>
+                    <p class="text-gray-300 text-sm mb-2">📞 <a href="tel:0980571240" class="hover:text-jaune transition">09.80.57.12.40</a></p>
+                    <a href="https://www.facebook.com/lagrappeescalade/" target="_blank" class="inline-flex items-center gap-2 text-gray-400 text-sm hover:text-jaune transition mt-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                        Suivez-nous sur Facebook
+                    </a>
+                </div>
+                <div>
+                    <h3 class="font-titre font-bold uppercase text-xs tracking-widest mb-4 text-gray-400">Navigation</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="index.html" class="hover:text-jaune transition">Accueil</a></li>
+                        <li><a href="salle.html" class="hover:text-jaune transition">La Salle</a></li>
+                        <li><a href="cave.html" class="hover:text-jaune transition">La Cave</a></li>
+                        <li><a href="https://la-grappe-escalade.fr/contact-la-grappe-escalade/" target="_blank" class="hover:text-jaune transition">Contact officiel</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 text-center text-xs text-gray-600">
+                &copy; 2026 La Grappe Escalade. Tous droits réservés.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const btn = document.getElementById('burger-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+
+        document.querySelectorAll('.faq-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const icon = btn.querySelector('.faq-icon');
+                const isOpen = !content.classList.contains('hidden');
+                document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+                document.querySelectorAll('.faq-icon').forEach(i => i.style.transform = '');
+                if (!isOpen) {
+                    content.classList.remove('hidden');
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

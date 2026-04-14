@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Salle (Le Bloc) | La Grappe Escalade Perpignan</title>
+    <meta name="description" content="La salle d'escalade sur bloc La Grappe Escalade Perpignan : pour tous les niveaux. 400m² grimpables, jusqu'à 4m50. 18 Av. Victor Dalbiez.">
+
+    <link rel="icon" href="https://la-grappe-escalade.fr/wp-content/uploads/2017/08/cropped-la-grappe-escalade-salle-escalade-192x192.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'violet': '#6B3790',
+                        'violet-dark': '#4e2870',
+                        'violet-light': '#9b6dc0',
+                        'jaune': '#f5c400',
+                        'jaune-light': '#ffe066',
+                        'clair': '#f8f6fb',
+                        'clair2': '#f0ebf7',
+                    },
+                    fontFamily: {
+                        'titre': ['Montserrat', 'sans-serif'],
+                        'texte': ['Open Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .fade-in { animation: fadeIn 0.9s ease both; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+        .card-hover { transition: transform .3s, box-shadow .3s; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(107,55,144,.18); }
+        .nav-link { position:relative; }
+        .nav-link::after { content:''; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:#6B3790; transition:width .3s; }
+        .nav-link:hover::after, .nav-link.active::after { width:100%; }
+        .tag { display:inline-block; background:#ede6f5; color:#6B3790; font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; padding:4px 12px; border-radius:999px; }
+        section { scroll-margin-top: 80px; }
+    </style>
+</head>
+<body class="bg-white text-gray-800 font-texte antialiased">
+
+    <!-- NAVIGATION -->
+    <nav class="bg-white/95 backdrop-blur-sm fixed w-full z-50 border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <img src="https://la-grappe-escalade.fr/wp-content/uploads/2017/07/logo-SMALL.png"
+                         alt="Logo La Grappe Escalade" class="h-12 w-auto"
+                         onerror="this.style.display='none'; document.getElementById('logo-txt').style.display='flex';">
+                    <a href="index.html" id="logo-txt" class="hidden items-center gap-2">
+                        <div class="w-9 h-9 bg-violet rounded-lg flex items-center justify-center">
+                            <span class="text-jaune font-titre font-black text-base">LG</span>
+                        </div>
+                        <span class="text-lg font-titre font-black uppercase text-gray-900">La Grappe <span class="text-violet">Escalade</span></span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-7 font-titre font-bold text-sm uppercase text-gray-700">
+                    <a href="index.html" class="nav-link hover:text-violet transition">Accueil</a>
+                    <a href="salle.html" class="nav-link active text-violet">La Salle</a>
+                    <a href="cave.html" class="nav-link hover:text-violet transition">La Cave</a>
+                    <a href="tarifs.html" class="nav-link hover:text-violet transition">Tarifs</a>
+                    <a href="evenements.html" class="nav-link text-violet font-black hover:text-violet-dark transition drop-shadow-sm">ÉVÉNEMENTS ⚡</a>
+                    <a href="index.html#equipe" class="nav-link hover:text-violet transition">L'Équipe</a>
+                    <a href="index.html#contact" class="bg-violet text-white px-5 py-2 rounded-lg hover:bg-violet-dark transition shadow-sm">Venir grimper</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="burger-btn" class="text-gray-700 focus:outline-none p-2">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200 px-4 py-4 space-y-3 font-titre font-bold text-sm uppercase text-gray-700">
+            <a href="index.html" class="block hover:text-violet">Accueil</a>
+            <a href="salle.html" class="block text-violet">La Salle</a>
+            <a href="cave.html" class="block hover:text-violet">La Cave</a>
+            <a href="tarifs.html" class="block hover:text-violet">Tarifs</a>
+            <a href="index.html#equipe" class="block hover:text-violet">L'Équipe</a>
+            <a href="index.html#contact" class="block bg-violet text-white px-4 py-2 rounded-lg text-center mt-2">Venir grimper</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="relative pt-20 min-h-[65vh] flex items-end"
+        style="background-image: url('images/Salle/2nd salle + arche.jpg'); background-size:cover; background-position:center top;">
+        <div class="absolute inset-0 bg-gradient-to-t from-violet-dark/80 via-violet/30 to-transparent"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 pb-16 fade-in">
+            <span class="inline-block bg-jaune text-violet-dark font-titre font-black text-xs uppercase tracking-widest px-4 py-2 rounded-full mb-4">L'espace grimpe</span>
+            <h1 class="font-titre text-5xl md:text-7xl font-black tracking-tight text-white uppercase mb-3">La <span class="text-jaune">Salle</span></h1>
+            <p class="text-white/80 text-xl max-w-2xl">
+                La salle d'escalade sur bloc de Perpignan. Pour tous les niveaux. +400m² grimpables !
+            </p>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="bg-violet text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center font-titre font-bold">
+            <div>
+                <p class="text-4xl font-black text-jaune">+400<span class="text-2xl">m²</span></p>
+                <p class="text-xs uppercase tracking-wide mt-1 text-white/70">Surface grimpable</p>
+            </div>
+            <div>
+                <p class="text-4xl font-black text-jaune">4m50</p>
+                <p class="text-xs uppercase tracking-wide mt-1 text-white/70">Hauteur max</p>
+            </div>
+            <div>
+                <p class="text-4xl font-black text-jaune">Tous</p>
+                <p class="text-xs uppercase tracking-wide mt-1 text-white/70">Les niveaux</p>
+            </div>
+            <div>
+                <p class="text-4xl font-black text-jaune">de 8 à 14</p>
+                <p class="text-xs uppercase tracking-wide mt-1 text-white/70">Blocs renouvelés / semaine</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LE BLOC - DESCRIPTION -->
+    <section id="le-bloc" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <span class="tag">L'escalade sans corde ni baudrier</span>
+                <h2 class="font-titre text-4xl md:text-5xl font-black text-gray-900 uppercase mt-3 mb-4">Le <span class="text-violet">Bloc</span></h2>
+                <div class="w-20 h-1 bg-jaune mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-14 items-center mb-20">
+                <div>
+                    <img src="images/Salle/1er salle.jpg"
+                        alt="Salle de bloc La Grappe Escalade - vue générale"
+                        class="rounded-2xl w-full h-96 object-cover shadow-lg border border-gray-100"
+                        onerror="this.src='https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=800&q=80'">
+                </div>
+                <div>
+                    <blockquote class="border-l-4 border-violet pl-5 italic text-gray-600 text-lg mb-8">
+                        « Venez grimper seul, en famille ou entre amis, pendant votre pause déjeuner, après votre travail. La salle d'escalade de Perpignan est là pour vous accueillir. »
+                    </blockquote>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4 bg-clair rounded-xl p-5 border border-clair2">
+                            <div class="bg-violet text-white w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center font-black text-sm mt-0.5">✓</div>
+                            <div>
+                                <p class="font-titre font-bold text-gray-800">Jusqu'à 4m50 de hauteur</p>
+                                <p class="text-gray-500 text-sm mt-0.5">L'escalade où l'on tombe sur un confortable matelas. Facile d'accès, sans limite !</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 bg-clair rounded-xl p-5 border border-clair2">
+                            <div class="bg-violet text-white w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center font-black text-sm mt-0.5">✓</div>
+                            <div>
+                                <p class="font-titre font-bold text-gray-800">Salle propre, lumineuse, climatisée</p>
+                                <p class="text-gray-500 text-sm mt-0.5">Couleurs vives, style industriel, bonne ambiance. Nouveaux blocs chaque semaine !</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 bg-clair rounded-xl p-5 border border-clair2">
+                            <div class="bg-violet text-white w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center font-black text-sm mt-0.5">✓</div>
+                            <div>
+                                <p class="font-titre font-bold text-gray-800">Enfants bienvenus (à partir de 8 ans)</p>
+                                <p class="text-gray-500 text-sm mt-0.5">8–10 ans : 1 adulte compétent pour max 2 enfants. <a href="http://la-grappe-escalade.fr/wp-content/uploads/2017/08/AUTORISATION-PARENTALE.pdf" class="text-violet hover:underline">Autorisation parentale →</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="tarifs.html" class="inline-block mt-6 bg-violet text-white px-6 py-3 rounded-xl font-titre font-bold text-sm uppercase hover:bg-violet-dark transition shadow-md">
+                        Voir les tarifs →
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- LE PRESSOIR -->
+    <section id="pressoir" class="py-24 bg-clair">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
+                <div>
+                    <span class="tag">Musculation spécifique escalade</span>
+                    <h2 class="font-titre text-4xl font-black text-gray-900 uppercase mt-4 mb-4">Le <span class="text-jaune bg-violet px-2 py-0.5 rounded">Pressoir</span></h2>
+                    <div class="w-14 h-1 bg-violet mb-6"></div>
+                    <blockquote class="border-l-4 border-jaune pl-4 italic text-gray-600 mb-6">
+                        « Des entraînements spécifiques pour progresser en force, en explosivité, en souplesse, en gainage ! Tous les agrès nécessaires pour une bonne séance de torture. »
+                    </blockquote>
+                    <p class="text-gray-500 mb-6 text-sm">Un pan Gullich, des sangles, des boules… Le fitness, le CrossFit… laisse tomber, ici c'est pire. Tu rentres, tu ressors pressé(e).</p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="flex items-center gap-2 text-sm text-gray-600 bg-white rounded-lg p-3 border border-gray-200 shadow-sm"><span class="text-violet font-black">→</span> Pan Gullich</div>
+                        <div class="flex items-center gap-2 text-sm text-gray-600 bg-white rounded-lg p-3 border border-gray-200 shadow-sm"><span class="text-violet font-black">→</span> Sangles de suspension</div>
+                        <div class="flex items-center gap-2 text-sm text-gray-600 bg-white rounded-lg p-3 border border-gray-200 shadow-sm"><span class="text-violet font-black">→</span> Boules lestées</div>
+                        <div class="flex items-center gap-2 text-sm text-gray-600 bg-white rounded-lg p-3 border border-gray-200 shadow-sm"><span class="text-violet font-black">→</span> Barres de tractions</div>
+                        <div class="flex items-center gap-2 text-sm text-gray-600 bg-white rounded-lg p-3 border border-gray-200 shadow-sm"><span class="text-violet font-black">→</span> Poutre de doigts</div>
+                        <div class="flex items-center gap-2 text-sm text-gray-600 bg-white rounded-lg p-3 border border-gray-200 shadow-sm"><span class="text-violet font-black">→</span> Campus board</div>
+                    </div>
+                </div>
+                <div>
+                    <img src="images/Salle/Pressoir.jpg"
+                        alt="Le Pressoir - espace musculation La Grappe Escalade"
+                        class="rounded-2xl w-full h-80 object-cover shadow-xl border border-gray-200"
+                        onerror="this.src='https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ESPACE DÉTENTE -->
+    <section id="detente" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
+                <div class="order-2 md:order-1">
+                    <img src="images/Salle/Espace detente.jpg"
+                        alt="Espace détente La Grappe Escalade"
+                        class="rounded-2xl w-full h-80 object-cover shadow-xl border border-gray-100">
+                </div>
+                <div class="order-1 md:order-2">
+                    <span class="tag">Se reposer et échanger</span>
+                    <h2 class="font-titre text-4xl font-black text-gray-900 uppercase mt-4 mb-4">L'Espace <span class="text-violet">Détente</span></h2>
+                    <div class="w-14 h-1 bg-jaune mb-6"></div>
+                    <blockquote class="border-l-4 border-violet pl-4 italic text-gray-600 mb-6">
+                        « Parce que l'escalade c'est aussi le partage et la convivialité après une bonne séance. »
+                    </blockquote>
+                    <p class="text-gray-500 mb-6 text-sm">Canapés confortables, lumière naturelle, et une ambiance chaleureuse. L'espace idéal pour débriefer de ses croix, lire un topo ou simplement récupérer tranquillement sous l'œil bienveillant du sapin (selon la saison !).</p>
+                    <a href="cave.html" class="inline-flex items-center gap-2 text-violet font-titre font-bold text-sm uppercase hover:text-jaune transition">
+                        Découvrir le Bar & La Cave →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HORAIRES & CTA -->
+    <section class="py-20 bg-violet text-center">
+        <div class="max-w-5xl mx-auto px-4">
+            <h2 class="font-titre text-4xl font-black text-white uppercase mb-3">Horaires <span class="text-jaune">d'ouverture</span></h2>
+            <div class="w-16 h-1 bg-jaune mx-auto mb-10"></div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 mb-10">
+                <div class="bg-white/15 border border-white/20 rounded-xl p-4"><p class="text-jaune font-titre font-black text-xs uppercase mb-1">Lundi</p><p class="text-white font-bold text-sm">17h–22h</p></div>
+                <div class="bg-white/15 border border-white/20 rounded-xl p-4"><p class="text-jaune font-titre font-black text-xs uppercase mb-1">Mardi</p><p class="text-white font-bold text-sm">12h–22h</p></div>
+                <div class="bg-white/15 border border-white/20 rounded-xl p-4"><p class="text-jaune font-titre font-black text-xs uppercase mb-1">Mercredi</p><p class="text-white font-bold text-sm">14h–22h</p></div>
+                <div class="bg-white/15 border border-white/20 rounded-xl p-4"><p class="text-jaune font-titre font-black text-xs uppercase mb-1">Jeudi</p><p class="text-white font-bold text-sm">12h–22h</p></div>
+                <div class="bg-white/15 border border-white/20 rounded-xl p-4"><p class="text-jaune font-titre font-black text-xs uppercase mb-1">Vendredi</p><p class="text-white font-bold text-sm">12h–22h</p></div>
+                <div class="bg-white/15 border border-white/20 rounded-xl p-4"><p class="text-jaune font-titre font-black text-xs uppercase mb-1">Samedi</p><p class="text-white font-bold text-sm">10h–19h</p><p class="text-white/50 text-xs">privatisation 19h–22h</p></div>
+                <div class="bg-white/15 border border-white/20 rounded-xl p-4"><p class="text-jaune font-titre font-black text-xs uppercase mb-1">Dimanche</p><p class="text-white font-bold text-sm">14h–19h</p></div>
+            </div>
+            <p class="text-white/60 text-sm mb-8">🌙 Entrée Nuit à partir de 21h — Lundi, Mardi, Jeudi & Vendredi</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="tarifs.html" class="bg-jaune text-violet-dark px-8 py-4 rounded-xl font-titre font-bold text-sm uppercase hover:bg-jaune-light transition shadow-lg">Voir les tarifs</a>
+                <a href="index.html#contact" class="border-2 border-white text-white px-8 py-4 rounded-xl font-titre font-bold text-sm uppercase hover:bg-white hover:text-violet transition shadow-lg">Nous contacter</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://la-grappe-escalade.fr/wp-content/uploads/2017/07/logo-SMALL.png" alt="Logo" class="h-10 w-auto" onerror="this.style.display='none'">
+                        <span class="font-titre font-black uppercase">La Grappe <span class="text-violet-light">Escalade</span></span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Un même nom, deux univers !</p>
+                    <p class="text-gray-500 text-xs mt-2">SARL La Grappe Escalade Durbet Moretti · SIRET : 99412665400015</p>
+                </div>
+                <div>
+                    <h3 class="font-titre font-bold uppercase text-xs tracking-widest mb-4 text-gray-400">Contact</h3>
+                    <p class="text-gray-300 text-sm mb-2">📍 18 Avenue Victor Dalbiez, 66000 Perpignan</p>
+                    <p class="text-gray-300 text-sm mb-2">📞 <a href="tel:0980571240" class="hover:text-jaune transition">09.80.57.12.40</a></p>
+                </div>
+                <div>
+                    <h3 class="font-titre font-bold uppercase text-xs tracking-widest mb-4 text-gray-400">Navigation</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="index.html" class="hover:text-jaune transition">Accueil</a></li>
+                        <li><a href="salle.html" class="hover:text-jaune transition">La Salle (Le Bloc)</a></li>
+                        <li><a href="cave.html" class="hover:text-jaune transition">La Cave (Le Bar)</a></li>
+                        <li><a href="tarifs.html" class="hover:text-jaune transition">Les Tarifs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 text-center text-xs text-gray-600">
+                &copy; 2026 La Grappe Escalade. Tous droits réservés.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const btn = document.getElementById('burger-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+    </script>
+</body>
+</html>
