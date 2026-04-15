@@ -460,12 +460,25 @@
         }
 
         // ─── SUBMIT FORM ────────────────────────────────────────────────────────
+        async function doRegister(payload) {
+            const res = await fetch('/api/events/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            return res.json();
+        }
+
         async function submitForm(e, eventId) {
             e.preventDefault();
             const btn = document.getElementById(`btn-${eventId}`);
             const origText = btn.textContent;
             btn.textContent = 'Traitement...';
             btn.disabled = true;
+
+            // Supprimer l'éventuel message d'erreur précédent
+            const oldErr = document.getElementById(`err-${eventId}`);
+            if (oldErr) oldErr.remove();
 
             const payload = {
                 event_id: eventId,
@@ -475,27 +488,39 @@
                 categorie: document.getElementById(`categorie-${eventId}`).value
             };
 
+            let data = null;
             try {
-                const res = await fetch('/api/events/register', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                const data = await res.json();
-
-                if (data.success) {
-                    document.getElementById(`success-${eventId}`).classList.remove('hidden');
-                    fetchAllEvents(); // Refresh spots everywhere
-                } else {
-                    alert('Erreur : ' + data.message);
+                data = await doRegister(payload);
+            } catch (_) {
+                // Erreur réseau transitoire — on attend 900 ms et on retente une fois
+                await new Promise(r => setTimeout(r, 900));
+                try {
+                    data = await doRegister(payload);
+                } catch (err2) {
+                    const errEl = document.createElement('p');
+                    errEl.id = `err-${eventId}`;
+                    errEl.className = 'text-red-500 text-xs text-center mt-2';
+                    errEl.textContent = '⚠️ Connexion impossible, réessayez dans quelques secondes.';
+                    btn.insertAdjacentElement('afterend', errEl);
                     btn.textContent = origText;
                     btn.disabled = false;
-                    fetchAllEvents();
+                    return;
                 }
-            } catch (err) {
-                alert('Erreur de connexion au serveur !');
+            }
+
+            if (data && data.success) {
+                document.getElementById(`success-${eventId}`).classList.remove('hidden');
+                fetchAllEvents();
+            } else {
+                const msg = data?.message || 'Une erreur est survenue.';
+                const errEl = document.createElement('p');
+                errEl.id = `err-${eventId}`;
+                errEl.className = 'text-red-500 text-xs text-center mt-2';
+                errEl.textContent = '⚠️ ' + msg;
+                btn.insertAdjacentElement('afterend', errEl);
                 btn.textContent = origText;
                 btn.disabled = false;
+                fetchAllEvents();
             }
         }
 
