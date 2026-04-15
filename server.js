@@ -149,6 +149,13 @@ function parseEvent(row) {
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
+// ─── URLs PROPRES (sans .html) ────────────────────────────────────────────────
+['salle', 'cave', 'tarifs', 'evenements', 'mentions-legales', 'politique-rgpd', 'admin'].forEach(page => {
+  app.get(`/${page}`, (req, res) =>
+    res.sendFile(path.join(__dirname, `${page}.html`))
+  );
+});
+
 // ─── AUTH ─────────────────────────────────────────────────────────────────────
 // Endpoint public de connexion
 app.post('/api/login', (req, res) => {
