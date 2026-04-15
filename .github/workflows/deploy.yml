@@ -1,0 +1,25 @@
+name: 🚀 Déploiement Production
+
+on:
+  push:
+    branches:
+      - main  # Se déclenche UNIQUEMENT sur la branche main
+
+jobs:
+  deploy:
+    name: Déployer sur Infomaniak
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📡 Connexion SSH et déploiement
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: 22
+          script: |
+            cd ~/sites/new.la-grappe-escalade.fr
+            git pull origin main
+            npm install --production
+            echo "✅ Déploiement terminé"
