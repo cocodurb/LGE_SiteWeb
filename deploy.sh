@@ -1,22 +1,36 @@
 #!/bin/bash
-# Script de déploiement : fusionne dev dans main et déclenche le déploiement automatique
+# ─── Script de déploiement LGE Shotgun ────────────────────────────────────────
+# Usage : bash deploy.sh
+# Ce script prépare et envoie le code sur GitHub.
+# Il vous rappelle ensuite les 2 étapes manuelles sur Infomaniak.
 
-echo "🔄 Déploiement en cours..."
-
-# S'assurer qu'on est sur dev et que tout est commité
+echo ""
+echo "🔄 Étape 1/3 — Sauvegarde des modifications sur dev..."
 git checkout dev
 git add -A
-git commit -m "Deploy: $(date '+%Y-%m-%d %H:%M')" 2>/dev/null || echo "Rien à committer."
+git commit -m "Deploy: $(date '+%Y-%m-%d %H:%M')" 2>/dev/null || echo "   Rien à committer."
 
-# Fusionner dev dans main
+echo ""
+echo "🔀 Étape 2/3 — Fusion dev → main et envoi sur GitHub..."
 git checkout main
 git merge dev --no-edit
-
-# Pousser main → déclenche GitHub Actions → déploie sur Infomaniak
 git push origin main
-
-# Revenir sur dev pour continuer à travailler
 git checkout dev
 
-echo "✅ Déploiement envoyé ! GitHub Actions va mettre à jour le serveur automatiquement."
-echo "📊 Suivez l'avancement ici : https://github.com/cocodurb/LGE_SiteWeb/actions"
+echo ""
+echo "✅ Code envoyé sur GitHub !"
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "📋 Étape 3/3 — Mise à jour du serveur Infomaniak (2 min)"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+echo "   1. Ouvrez : https://manager.infomaniak.com"
+echo "   2. Hébergement → new.la-grappe-escalade.fr → Console SSH"
+echo "   3. Tapez dans la console SSH :"
+echo ""
+echo "      cd ~/sites/new.la-grappe-escalade.fr && git pull origin main"
+echo ""
+echo "   4. Retournez sur le Tableau de bord et cliquez 'Redémarrer'"
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
