@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | La Grappe Escalade Perpignan</title>
+    <meta name="description" content="Contactez La Grappe Escalade à Perpignan. Par téléphone, email ou via notre formulaire.">
+
+    <link rel="icon" href="https://la-grappe-escalade.fr/wp-content/uploads/2017/08/cropped-la-grappe-escalade-salle-escalade-192x192.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'violet': '#6B3790',
+                        'violet-dark': '#4e2870',
+                        'violet-light': '#9b6dc0',
+                        'jaune': '#f5c400',
+                        'jaune-light': '#ffe066',
+                        'clair': '#f8f6fb',
+                        'clair2': '#f0ebf7',
+                    },
+                    fontFamily: {
+                        'titre': ['Montserrat', 'sans-serif'],
+                        'texte': ['Open Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .fade-in { animation: fadeIn 0.9s ease both; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+        .nav-link { position:relative; }
+        .nav-link::after { content:''; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:#6B3790; transition:width .3s; }
+        .nav-link:hover::after, .nav-link.active::after { width:100%; }
+        section { scroll-margin-top: 80px; }
+    </style>
+</head>
+<body class="bg-white text-gray-800 font-texte antialiased flex flex-col min-h-screen">
+
+    <!-- NAVIGATION -->
+    <nav class="bg-white/95 backdrop-blur-sm fixed w-full z-50 border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <img loading="lazy" src="https://la-grappe-escalade.fr/wp-content/uploads/2017/07/logo-SMALL.png"
+                         alt="Logo La Grappe Escalade" class="h-12 w-auto"
+                         onerror="this.style.display='none'; document.getElementById('logo-txt').style.display='flex';">
+                    <a href="/" id="logo-txt" class="hidden items-center gap-2">
+                        <div class="w-9 h-9 bg-violet rounded-lg flex items-center justify-center">
+                            <span class="text-jaune font-titre font-black text-base">LG</span>
+                        </div>
+                        <span class="text-lg font-titre font-black uppercase text-gray-900">La Grappe <span class="text-violet">Escalade</span></span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-7 font-titre font-bold text-sm uppercase text-gray-700">
+                    <a href="/" class="nav-link hover:text-violet transition">Accueil</a>
+                    <a href="/salle" class="nav-link hover:text-violet transition">La Salle</a>
+                    <a href="/cave" class="nav-link hover:text-violet transition">La Cave</a>
+                    <a href="/tarifs" class="nav-link hover:text-violet transition">Tarifs</a>
+                    <a href="/evenements" class="nav-link text-violet font-black hover:text-violet-dark transition drop-shadow-sm">ÉVÉNEMENTS ⚡</a>
+                    <a href="/#equipe" class="nav-link hover:text-violet transition">L'Équipe</a>
+                    <a href="/#contact" class="bg-violet text-white px-5 py-2 rounded-lg hover:bg-violet-dark transition shadow-sm">Venir grimper</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="burger-btn" class="text-gray-700 focus:outline-none p-2">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200 px-4 py-4 space-y-3 font-titre font-bold text-sm uppercase text-gray-700">
+            <a href="/" class="block hover:text-violet">Accueil</a>
+            <a href="/salle" class="block hover:text-violet">La Salle</a>
+            <a href="/cave" class="block hover:text-violet">La Cave</a>
+            <a href="/tarifs" class="block hover:text-violet">Tarifs</a>
+            <a href="/evenements" class="block text-violet font-black bg-violet/5 py-1 px-2 rounded">ÉVÉNEMENTS ⚡</a>
+            <a href="/#equipe" class="block hover:text-violet">L'Équipe</a>
+            <a href="/#contact" class="block bg-violet text-white px-4 py-2 rounded-lg text-center mt-2">Venir grimper</a>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <section class="pt-32 pb-16 bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in">
+            <h1 class="font-titre text-4xl md:text-5xl font-black text-gray-900 uppercase">Nous <span class="text-violet">contacter</span></h1>
+            <div class="w-20 h-1 bg-jaune mx-auto mt-4 mb-6"></div>
+            <p class="text-gray-500 max-w-xl mx-auto">Une question sur nos tarifs, nos événements, ou un objet oublié à la salle ? Écrivez-nous, notre équipe vous répondra rapidement.</p>
+        </div>
+    </section>
+
+    <!-- CONTENT -->
+    <section class="py-12 flex-grow">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <!-- COORDONNEES & MAP -->
+                <div>
+                    <h2 class="font-titre text-2xl font-black text-gray-900 uppercase mb-6">Nos <span class="text-violet">coordonnées</span></h2>
+                    
+                    <div class="space-y-6 mb-8">
+                        <div class="flex items-start gap-4 p-5 bg-clair border border-clair2 rounded-2xl">
+                            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm text-xl flex-shrink-0">📍</div>
+                            <div>
+                                <h3 class="font-titre font-bold text-gray-900 uppercase text-sm mb-1">Adresse</h3>
+                                <p class="text-gray-600 text-sm">18 Avenue Victor Dalbiez<br>66000 Perpignan</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-5 bg-clair border border-clair2 rounded-2xl">
+                            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm text-xl flex-shrink-0">📞</div>
+                            <div>
+                                <h3 class="font-titre font-bold text-gray-900 uppercase text-sm mb-1">Téléphone</h3>
+                                <p class="text-gray-600 text-sm"><a href="tel:0980571240" class="hover:text-violet transition">09.80.57.12.40</a></p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-5 bg-clair border border-clair2 rounded-2xl">
+                            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm text-xl flex-shrink-0">📧</div>
+                            <div>
+                                <h3 class="font-titre font-bold text-gray-900 uppercase text-sm mb-1">Email direct</h3>
+                                <p class="text-gray-600 text-sm"><a href="mailto:contact@la-grappe-escalade.fr" class="hover:text-violet transition">contact@la-grappe-escalade.fr</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MAP -->
+                    <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-sm h-64 bg-gray-100">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2931.25870020117!2d2.8809270764121404!3d42.71946051230155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b06e4922e96435%3A0xc3af0027f3299719!2sLa%20Grappe%20Escalade!5e0!3m2!1sfr!2sfr!4v1713295847321!5m2!1sfr!2sfr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+
+                <!-- FORM CONTACT -->
+                <div class="bg-white border text-gray-800 border-gray-200 rounded-2xl p-8 shadow-xl relative overflow-hidden">
+                    <h2 class="font-titre text-2xl font-black text-gray-900 uppercase mb-2">Envoyez-nous un <span class="text-violet">message</span></h2>
+                    <p class="text-gray-500 text-sm mb-8">Remplissez le formulaire ci-dessous et nous reviendrons vers vous au plus vite.</p>
+                    
+                    <form id="contact-form" class="space-y-5">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Prénom</label>
+                                <input type="text" id="prenom" required class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet focus:border-transparent transition" placeholder="Prénom">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Nom</label>
+                                <input type="text" id="nom" required class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet focus:border-transparent transition" placeholder="Nom">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Email</label>
+                            <input type="email" id="email" required class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet focus:border-transparent transition" placeholder="votre.email@exemple.com">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Sujet</label>
+                            <input type="text" id="sujet" required class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet focus:border-transparent transition" placeholder="Objet de votre message">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Message</label>
+                            <textarea id="message" required rows="5" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet focus:border-transparent transition resize-none" placeholder="Comment pouvons-nous vous aider ?"></textarea>
+                        </div>
+
+                        <div id="form-error" class="hidden text-red-500 text-sm text-center font-bold"></div>
+                        <div id="form-success" class="hidden bg-green-50 border border-green-200 text-green-700 text-sm text-center p-3 rounded-lg font-bold">✅ Message envoyé avec succès ! Nous vous recontacterons vite.</div>
+
+                        <button type="submit" id="submit-btn" class="w-full bg-violet text-white py-4 rounded-xl font-titre font-bold text-sm uppercase tracking-wide hover:bg-violet-dark transition shadow-lg mt-2">
+                            Envoyer le message ✉️
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-gray-900 text-white py-12 mt-12 border-t-4 border-violet">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <img loading="lazy" src="https://la-grappe-escalade.fr/wp-content/uploads/2017/07/logo-SMALL.png" alt="Logo" class="h-10 w-auto" onerror="this.style.display='none'">
+                        <span class="font-titre font-black uppercase text-lg">La Grappe <span class="text-violet-light">Escalade</span></span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Un même nom, deux univers !</p>
+                    <p class="text-gray-500 text-xs mt-2">SARL La Grappe Escalade Durbet Moretti · SIRET : 99412665400015</p>
+                </div>
+                <div>
+                    <h3 class="font-titre font-bold uppercase text-xs tracking-widest mb-4 text-gray-400">Contact</h3>
+                    <p class="text-gray-300 text-sm mb-2">📍 18 Avenue Victor Dalbiez, 66000 Perpignan</p>
+                    <p class="text-gray-300 text-sm mb-2">📞 <a href="tel:0980571240" class="hover:text-jaune transition">09.80.57.12.40</a></p>
+                    <a href="https://www.facebook.com/lagrappeescalade/" target="_blank" class="inline-flex items-center gap-2 text-gray-400 text-sm hover:text-jaune transition mt-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                        Suivez-nous sur Facebook
+                    </a>
+                </div>
+                <div>
+                    <h3 class="font-titre font-bold uppercase text-xs tracking-widest mb-4 text-gray-400">Navigation</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="/" class="hover:text-jaune transition">Accueil</a></li>
+                        <li><a href="/salle" class="hover:text-jaune transition">La Salle (Le Bloc)</a></li>
+                        <li><a href="/cave" class="hover:text-jaune transition">La Cave (Le Bar)</a></li>
+                        <li><a href="/tarifs" class="hover:text-jaune transition">Les Tarifs</a></li>
+                        <li><a href="/#equipe" class="hover:text-jaune transition">L'Équipe</a></li>
+                        <li><a href="/contact" class="hover:text-jaune transition text-jaune">Nous contacter</a></li>
+                        <li><a href="/mentions-legales" class="hover:text-jaune transition">Mentions Légales</a></li>
+                        <li><a href="/politique-rgpd" class="hover:text-jaune transition">Politique de Confidentialité</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 text-center text-xs text-gray-600">
+                <p>&copy; 2026 La Grappe Escalade. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu burger
+        const btn = document.getElementById('burger-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+
+        // Form submission
+        const form = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const errEl = document.getElementById('form-error');
+        const succEl = document.getElementById('form-success');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            errEl.classList.add('hidden');
+            succEl.classList.add('hidden');
+            
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = 'Envoi en cours...';
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
+
+            const payload = {
+                prenom: document.getElementById('prenom').value.trim(),
+                nom: document.getElementById('nom').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                sujet: document.getElementById('sujet').value.trim(),
+                message: document.getElementById('message').value.trim()
+            };
+
+            try {
+                const res = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    succEl.classList.remove('hidden');
+                    form.reset();
+                } else {
+                    errEl.textContent = '❌ ' + (data.message || 'Erreur inconnue.');
+                    errEl.classList.remove('hidden');
+                }
+            } catch (err) {
+                errEl.textContent = '❌ Impossible de contacter le serveur.';
+                errEl.classList.remove('hidden');
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+            }
+        });
+    </script>
+</body>
+</html>

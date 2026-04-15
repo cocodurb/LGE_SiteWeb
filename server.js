@@ -150,7 +150,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
 // ─── URLs PROPRES (sans .html) ────────────────────────────────────────────────
-['salle', 'cave', 'tarifs', 'evenements', 'mentions-legales', 'politique-rgpd', 'admin'].forEach(page => {
+['salle', 'cave', 'tarifs', 'evenements', 'mentions-legales', 'politique-rgpd', 'admin', 'contact'].forEach(page => {
   app.get(`/${page}`, (req, res) =>
     res.sendFile(path.join(__dirname, `${page}.html`))
   );
@@ -172,6 +172,36 @@ app.use('/api/admin', (req, res, next) => {
   const auth = req.headers['authorization'];
   if (auth === `Bearer ${ADMIN_PASSWORD}`) return next();
   res.status(401).json({ error: 'Non autorisé — veuillez vous connecter.' });
+});
+
+// ─── POST /api/contact ────────────────────────────────────────────────────────
+app.post('/api/contact', async (req, res) => {
+  const { prenom, nom, email, sujet, message } = req.body || {};
+  if (!prenom || !nom || !email || !sujet || !message || !EMAIL_PASS) {
+    return res.status(400).json({ success: false, message: 'Champs manquants ou serveur mal configuré.' });
+  }
+
+  const html = `
+    <h2>Nouveau message de contact — La Grappe Escalade</h2>
+    <p><strong>De:</strong> ${prenom} ${nom} (${email})</p>
+    <p><strong>Sujet:</strong> ${sujet}</p>
+    <hr>
+    <p>${message.replace(/\n/g, '<br>')}</p>
+  `;
+
+  try {
+    await transporter.sendMail({
+      from: `"La Grappe Escalade (Site)" <${EMAIL_FROM}>`,
+      to: EMAIL_FROM, // Send to themselves
+      replyTo: email,
+      subject: `Formulaire de contact : ${sujet}`,
+      html,
+    });
+    res.json({ success: true, message: 'Message envoyé avec succès.' });
+  } catch (err) {
+    console.error('❌ Erreur envoi email contact:', err.message);
+    res.status(500).json({ success: false, message: err.message });
+  }
 });
 
 // ─── GET /api/events/active ───────────────────────────────────────────────────
