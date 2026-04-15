@@ -3,13 +3,12 @@ name: 🚀 Déploiement Production
 on:
   push:
     branches:
-      - main  # Se déclenche UNIQUEMENT sur la branche main
+      - main
 
 jobs:
   deploy:
     name: Déployer sur Infomaniak
     runs-on: ubuntu-latest
-
     steps:
       - name: 📡 Connexion SSH et déploiement
         uses: appleboy/ssh-action@v1.0.3
