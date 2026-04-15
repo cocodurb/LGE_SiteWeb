@@ -19,12 +19,38 @@
     </style>
 </head>
 
+<!-- ─── ÉCRAN DE CONNEXION ───────────────────────────────────────────────── -->
+<div id="login-screen" style="display:none;position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#1e0533 0%,#3b0764 50%,#1e0533 100%);display:flex;align-items:center;justify-content:center;">
+  <div style="background:rgba(255,255,255,0.08);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.15);border-radius:24px;padding:48px 40px;width:100%;max-width:400px;box-shadow:0 25px 60px rgba(0,0,0,0.5);">
+    <div style="text-align:center;margin-bottom:32px;">
+      <div style="font-size:48px;margin-bottom:12px;">🧗</div>
+      <h1 style="color:white;font-family:'Montserrat',sans-serif;font-weight:900;font-size:22px;margin:0 0 6px;">La Grappe Escalade</h1>
+      <p style="color:rgba(255,255,255,0.5);font-size:13px;margin:0;">Panneau d'administration</p>
+    </div>
+    <div id="login-error" style="display:none;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:#fca5a5;padding:10px 14px;border-radius:10px;font-size:13px;margin-bottom:16px;text-align:center;"></div>
+    <div style="margin-bottom:16px;">
+      <label style="display:block;color:rgba(255,255,255,0.6);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Mot de passe</label>
+      <input id="login-password" type="password" placeholder="••••••••••"
+        style="width:100%;box-sizing:border-box;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:12px;padding:14px 16px;color:white;font-size:15px;outline:none;"
+        onkeydown="if(event.key==='Enter') doLogin()">
+    </div>
+    <button onclick="doLogin()" id="login-btn"
+      style="width:100%;background:linear-gradient(135deg,#7c3aed,#a855f7);border:none;border-radius:12px;padding:14px;color:white;font-size:15px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;transition:opacity .2s;"
+      onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+      Connexion
+    </button>
+  </div>
+</div>
+
 <body class="text-gray-800 p-4 md:p-8 min-h-screen">
 
 <div class="max-w-7xl mx-auto">
     <div class="flex items-center justify-between mb-8 border-b-4 border-yellow-400 pb-3">
         <h1 class="text-3xl font-montserrat font-black uppercase text-purple-800">🎯 Pilote des Inscriptions</h1>
-        <span id="server-status" class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-bold animate-pulse">Connecté</span>
+        <div class="flex items-center gap-3">
+            <span id="server-status" class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-bold animate-pulse">Connecté</span>
+            <button onclick="doLogout()" class="text-xs bg-gray-100 hover:bg-red-50 hover:text-red-600 text-gray-500 px-3 py-1 rounded-full font-bold transition" title="Déconnexion">Déconnexion</button>
+        </div>
     </div>
 
     <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
@@ -145,6 +171,56 @@
 </div>
 
 <script>
+    // ─── AUTH ──────────────────────────────────────────────────────────────
+    let adminToken = sessionStorage.getItem('admin_token');
+
+    function showLogin() {
+        document.getElementById('login-screen').style.display = 'flex';
+        setTimeout(() => document.getElementById('login-password').focus(), 100);
+    }
+    function hideLogin() {
+        document.getElementById('login-screen').style.display = 'none';
+    }
+    async function doLogin() {
+        const pwd = document.getElementById('login-password').value;
+        const btn = document.getElementById('login-btn');
+        const err = document.getElementById('login-error');
+        btn.disabled = true; btn.textContent = 'Connexion...';
+        try {
+            const res = await fetch('/api/login', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ password: pwd }) });
+            const data = await res.json();
+            if (data.success) {
+                adminToken = data.token;
+                sessionStorage.setItem('admin_token', adminToken);
+                hideLogin();
+                loadAll();
+            } else {
+                err.textContent = data.message || 'Mot de passe incorrect';
+                err.style.display = 'block';
+            }
+        } catch(e) {
+            err.textContent = 'Erreur de connexion au serveur';
+            err.style.display = 'block';
+        }
+        btn.disabled = false; btn.textContent = 'Connexion';
+    }
+    function doLogout() {
+        sessionStorage.removeItem('admin_token');
+        adminToken = null;
+        showLogin();
+    }
+
+    // Wrapper fetch qui ajoute automatiquement le token
+    async function apiFetch(url, opts = {}) {
+        opts.headers = { ...(opts.headers || {}), 'Authorization': `Bearer ${adminToken}`, 'Content-Type': 'application/json' };
+        const res = await fetch(url, opts);
+        if (res.status === 401) { doLogout(); throw new Error('Session expirée'); }
+        return res;
+    }
+
+    // ─── INIT ──────────────────────────────────────────────────────────────
+    if (!adminToken) { showLogin(); } else { hideLogin(); }
+
     let allEvents = [];
     let currentFilter = 'active';
     let modalEventId = null;
@@ -180,7 +256,7 @@
     // ─── FETCH ────────────────────────────────────────────────────────────
     async function loadAll() {
         try {
-            const res = await fetch('/api/admin/events?t=' + Date.now());
+            const res = await apiFetch('/api/admin/events?t=' + Date.now());
             if (!res.ok) throw new Error();
             allEvents = await res.json();
             renderEvents();
@@ -320,9 +396,8 @@
 
     async function saveCats(evId, cats) {
         try {
-            const res = await fetch('/api/admin/events', {
+            const res = await apiFetch('/api/admin/events', {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ event_id: evId, diff: 0, categories: cats })
             });
             if (res.ok) {
@@ -372,9 +447,8 @@
             alert('Veuillez remplir tous les champs correctement.'); return;
         }
         try {
-            const res = await fetch('/api/admin/events', {
+            const res = await apiFetch('/api/admin/events', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
             const data = await res.json();
@@ -395,9 +469,8 @@
     // ─── ADJUST SPOTS ─────────────────────────────────────────────────────
     async function adjustSpots(eventId, diff) {
         try {
-            const res = await fetch('/api/admin/events', {
+            const res = await apiFetch('/api/admin/events', {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ event_id: eventId, diff: diff })
             });
             if (res.ok) loadAll();
@@ -407,9 +480,8 @@
     // ─── TOGGLE ACTIVE ────────────────────────────────────────────────────
     async function toggleActive(eventId, newState) {
         try {
-            const res = await fetch('/api/admin/events', {
+            const res = await apiFetch('/api/admin/events', {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ event_id: eventId, diff: 0, is_active: newState })
             });
             if (res.ok) loadAll();
@@ -420,9 +492,8 @@
     async function deleteEvent(eventId, name) {
         if (!confirm(`⚠️ Supprimer définitivement "${name}" et tous ses participants ? Cette action est irréversible.`)) return;
         try {
-            const res = await fetch('/api/admin/events', {
+            const res = await apiFetch('/api/admin/events', {
                 method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ event_id: eventId })
             });
             if (res.ok) loadAll();
@@ -444,7 +515,7 @@
 
     async function loadParticipants(eventId) {
         try {
-            const res = await fetch(`/api/admin/participants?event_id=${eventId}&t=${Date.now()}`);
+            const res = await apiFetch(`/api/admin/participants?event_id=${eventId}&t=${Date.now()}`);
             const participants = await res.json();
             document.getElementById('modal-count').textContent = `${participants.length} inscrit(s)`;
             const tbody = document.getElementById('modal-tbody');
@@ -477,9 +548,8 @@
     async function deleteParticipant(participantId, nom) {
         if (!confirm(`Supprimer l'inscription de ${nom.toUpperCase()} ? Ceci rajoutera +1 place libre.`)) return;
         try {
-            const res = await fetch('/api/admin/participants', {
+            const res = await apiFetch('/api/admin/participants', {
                 method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ participant_id: participantId })
             });
             if (res.ok) {

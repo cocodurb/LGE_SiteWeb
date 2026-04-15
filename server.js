@@ -4,8 +4,9 @@ const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const path    = require('path');
 
-const app     = express();
-const PORT    = process.env.PORT || 8000;
+const app            = express();
+const PORT           = process.env.PORT || 8000;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'LaGrappe2025';
 const DB_FILE = path.join(__dirname, 'database.sqlite');
 
 // ─── OPEN DB ──────────────────────────────────────────────────────────────────
@@ -63,6 +64,24 @@ function parseEvent(row) {
 // ─── MIDDLEWARE ───────────────────────────────────────────────────────────────
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
+
+// ─── AUTH ─────────────────────────────────────────────────────────────────────
+// Endpoint public de connexion
+app.post('/api/login', (req, res) => {
+  const { password } = req.body || {};
+  if (password === ADMIN_PASSWORD) {
+    res.json({ success: true, token: ADMIN_PASSWORD });
+  } else {
+    res.status(401).json({ success: false, message: 'Mot de passe incorrect' });
+  }
+});
+
+// Middleware qui protège toutes les routes /api/admin/*
+app.use('/api/admin', (req, res, next) => {
+  const auth = req.headers['authorization'];
+  if (auth === `Bearer ${ADMIN_PASSWORD}`) return next();
+  res.status(401).json({ error: 'Non autorisé — veuillez vous connecter.' });
+});
 
 // ─── GET /api/events/active ───────────────────────────────────────────────────
 app.get('/api/events/active', async (req, res) => {
