@@ -254,9 +254,15 @@ app.post('/api/events/register', async (req, res) => {
       return res.status(400).json({ success: false, message: 'Cet email est déjà inscrit à cet événement.' });
 
     // Vérifier que l'event existe et est actif
-    const evt = await get('SELECT available_spots, is_active, categories FROM events WHERE id = ?', [event_id]);
+    const evt = await get('SELECT available_spots, is_active, categories, shotgun_date FROM events WHERE id = ?', [event_id]);
     if (!evt || !evt.is_active)
       return res.status(404).json({ success: false, message: 'Événement introuvable ou archivé.' });
+
+    // Vérifier que la date d'ouverture est passée (sécurisation)
+    const ouvertureTime = new Date(evt.shotgun_date).getTime();
+    if (Date.now() < ouvertureTime) {
+      return res.status(403).json({ success: false, message: "L'inscription n'est pas encore ouverte pour cet événement." });
+    }
 
     let eventCategories = [];
     try { eventCategories = JSON.parse(evt.categories || '[]'); } catch(_) {}
