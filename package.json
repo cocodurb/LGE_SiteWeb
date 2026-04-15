@@ -1,0 +1,14 @@
+{
+  "name": "lge-shotgun",
+  "version": "1.0.0",
+  "description": "Système d'inscriptions La Grappe Escalade",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.3",
+    "sqlite3": "^5.1.7"
+  }
+}

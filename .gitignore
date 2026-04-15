@@ -1,6 +1,13 @@
+# Système macOS
 .DS_Store
+
+# Logs
+*.log
 server_log.txt
+
+# Node.js (régénéré via npm install)
+node_modules/
+
+# SQLite fichiers temporaires
 database.sqlite-shm
 database.sqlite-wal
-*.log
-__pycache__/
