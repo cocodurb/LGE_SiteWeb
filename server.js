@@ -61,7 +61,7 @@ async function sendConfirmationEmail({ prenom, nom, email, eventName, shotgunDat
               </td></tr>
               <tr><td>
                 <p style="margin:0 0 8px"><strong style="color:#fff">Événement :</strong> <span style="color:#52b788">${eventName}</span></p>
-                <p style="margin:0 0 8px"><strong style="color:#fff">Date du shotgun :</strong> ${dateFormatted}</p>
+                <p style="margin:0 0 8px"><strong style="color:#fff">Date de l'événement :</strong> ${dateFormatted}</p>
                 <p style="margin:0 0 8px"><strong style="color:#fff">Participant :</strong> ${prenom} ${nom}</p>
                 ${categorieHtml}
               </td></tr>
