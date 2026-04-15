@@ -123,7 +123,7 @@ app.post('/api/events/register', async (req, res) => {
   const e = (email     || '').trim().toLowerCase();
   const c = (categorie || '').trim();
 
-  if (!p || !n || !e || !c || !event_id)
+  if (!p || !n || !e || !event_id)
     return res.status(400).json({ success: false, message: 'Champs manquants' });
 
   try {
@@ -133,9 +133,15 @@ app.post('/api/events/register', async (req, res) => {
       return res.status(400).json({ success: false, message: 'Cet email est déjà inscrit à cet événement.' });
 
     // Vérifier que l'event existe et est actif
-    const evt = await get('SELECT available_spots, is_active FROM events WHERE id = ?', [event_id]);
+    const evt = await get('SELECT available_spots, is_active, categories FROM events WHERE id = ?', [event_id]);
     if (!evt || !evt.is_active)
       return res.status(404).json({ success: false, message: 'Événement introuvable ou archivé.' });
+
+    let eventCategories = [];
+    try { eventCategories = JSON.parse(evt.categories || '[]'); } catch(_) {}
+    if (eventCategories.length > 0 && !c) {
+      return res.status(400).json({ success: false, message: 'Catégorie requise pour cet événement.' });
+    }
 
     // Tenter de décrémenter
     const info = await run(
