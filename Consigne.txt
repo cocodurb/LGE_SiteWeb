@@ -1,0 +1,2 @@
+ouvrir terminal : bash deploy.sh
+puis sur infomaniak SSH : cd ~/sites/new.la-grappe-escalade.fr && git pull origin main

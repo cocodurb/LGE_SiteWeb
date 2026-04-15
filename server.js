@@ -1,13 +1,96 @@
 'use strict';
 
-const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
-const path    = require('path');
+const express      = require('express');
+const sqlite3      = require('sqlite3').verbose();
+const path         = require('path');
+const nodemailer   = require('nodemailer');
 
 const app            = express();
 const PORT           = process.env.PORT || 8000;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'LaGrappe2025';
-const DB_FILE = path.join(__dirname, 'database.sqlite');
+const DB_FILE        = path.join(__dirname, 'database.sqlite');
+
+// ─── SMTP INFOMANIAK ──────────────────────────────────────────────────────────
+const EMAIL_FROM = process.env.EMAIL_FROM || 'contact@la-grappe-escalade.fr';
+const EMAIL_PASS = process.env.EMAIL_PASS || '';
+
+const transporter = nodemailer.createTransport({
+  host: 'mail.infomaniak.com',
+  port: 465,
+  secure: true,
+  auth: {
+    user: EMAIL_FROM,
+    pass: EMAIL_PASS,
+  },
+});
+
+// Fonction d'envoi de l'email de confirmation
+async function sendConfirmationEmail({ prenom, nom, email, eventName, shotgunDate, categorie }) {
+  const dateFormatted = new Date(shotgunDate).toLocaleDateString('fr-FR', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+  const categorieHtml = categorie ? `<p style="margin:0 0 8px"><strong>Catégorie :</strong> ${categorie}</p>` : '';
+
+  const html = `
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f4f4f4;font-family:'Helvetica Neue',Arial,sans-serif">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f4;padding:40px 0">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#1a1a1a;border-radius:12px;overflow:hidden;max-width:600px">
+        <!-- HEADER -->
+        <tr>
+          <td style="background:linear-gradient(135deg,#2d6a4f,#52b788);padding:40px 40px 30px;text-align:center">
+            <h1 style="margin:0;color:#fff;font-size:28px;font-weight:700;letter-spacing:-0.5px">🧗 La Grappe Escalade</h1>
+            <p style="margin:10px 0 0;color:rgba(255,255,255,0.85);font-size:15px">Confirmation d'inscription</p>
+          </td>
+        </tr>
+        <!-- BODY -->
+        <tr>
+          <td style="padding:40px;color:#e0e0e0">
+            <p style="margin:0 0 20px;font-size:17px">Bonjour <strong style="color:#52b788">${prenom}</strong>,</p>
+            <p style="margin:0 0 24px;font-size:15px;line-height:1.6;color:#b0b0b0">
+              Votre inscription a bien été enregistrée ! Vous trouverez ci-dessous le récapitulatif de votre réservation.
+            </p>
+            <!-- RECAP CARD -->
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#262626;border-radius:10px;padding:24px;margin-bottom:28px">
+              <tr><td style="padding:0 0 16px">
+                <p style="margin:0;font-size:13px;color:#888;text-transform:uppercase;letter-spacing:1px">Récapitulatif</p>
+              </td></tr>
+              <tr><td>
+                <p style="margin:0 0 8px"><strong style="color:#fff">Événement :</strong> <span style="color:#52b788">${eventName}</span></p>
+                <p style="margin:0 0 8px"><strong style="color:#fff">Date du shotgun :</strong> ${dateFormatted}</p>
+                <p style="margin:0 0 8px"><strong style="color:#fff">Participant :</strong> ${prenom} ${nom}</p>
+                ${categorieHtml}
+              </td></tr>
+            </table>
+            <p style="margin:0 0 8px;font-size:14px;color:#888;line-height:1.6">
+              En cas de question ou d'annulation, contactez-nous en répondant à cet email.
+            </p>
+          </td>
+        </tr>
+        <!-- FOOTER -->
+        <tr>
+          <td style="background:#111;padding:24px 40px;text-align:center;border-top:1px solid #333">
+            <p style="margin:0;font-size:12px;color:#555">
+              La Grappe Escalade • <a href="https://www.la-grappe-escalade.fr" style="color:#52b788;text-decoration:none">la-grappe-escalade.fr</a>
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+
+  await transporter.sendMail({
+    from: `"La Grappe Escalade 🧗" <${EMAIL_FROM}>`,
+    to: email,
+    subject: `✅ Inscription confirmée — ${eventName}`,
+    html,
+  });
+}
 
 // ─── OPEN DB ──────────────────────────────────────────────────────────────────
 const db = new sqlite3.Database(DB_FILE);
@@ -153,6 +236,20 @@ app.post('/api/events/register', async (req, res) => {
 
     await run('INSERT INTO participants (event_id, prenom, nom, email, categorie) VALUES (?,?,?,?,?)',
               [event_id, p, n, e, c]);
+
+    // ─── Envoi email de confirmation ──────────────────────────────────────────
+    const evtFull = await get('SELECT name, shotgun_date FROM events WHERE id = ?', [event_id]);
+    if (evtFull && EMAIL_PASS) {
+      sendConfirmationEmail({
+        prenom: p,
+        nom: n,
+        email: e,
+        eventName: evtFull.name,
+        shotgunDate: evtFull.shotgun_date,
+        categorie: c,
+      }).catch(err => console.error('❌ Erreur envoi email:', err.message));
+    }
+
     res.json({ success: true });
   } catch(err) { res.status(500).json({ success: false, message: err.message }); }
 });
