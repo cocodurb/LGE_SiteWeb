@@ -11,3 +11,6 @@ node_modules/
 # SQLite fichiers temporaires
 database.sqlite-shm
 database.sqlite-wal
+
+# Variables d'environnement (ne jamais committer !)
+.env

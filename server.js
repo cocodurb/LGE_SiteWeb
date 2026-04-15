@@ -1,4 +1,5 @@
 'use strict';
+require('dotenv').config(); // Charge le fichier .env si présent
 
 const express      = require('express');
 const sqlite3      = require('sqlite3').verbose();
